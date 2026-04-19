@@ -43,28 +43,28 @@
   <!-- Header (shared) -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between gap-3">
-      <div class="flex items-center gap-3">
-        <button id="back-btn" class="hidden text-slate-500 hover:text-slate-900 text-sm font-medium">← Back</button>
-        <div>
-          <h1 id="header-title" class="text-lg sm:text-xl font-semibold">Heart4Macs</h1>
-          <p id="header-sub" class="text-xs text-slate-500"></p>
+      <div class="flex items-center gap-3 min-w-0">
+        <button id="back-btn" class="hidden text-slate-500 hover:text-slate-900 text-sm font-medium shrink-0">← Back</button>
+        <div class="min-w-0">
+          <h1 id="header-title" class="text-lg sm:text-xl font-semibold truncate">Heart4Macs</h1>
+          <p id="header-sub" class="text-xs text-slate-500 truncate"></p>
         </div>
       </div>
       <a href="sms:+16467045090" target="_blank"
-        class="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-full whitespace-nowrap">
+        class="bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-full whitespace-nowrap shrink-0">
         💬 Text Us
       </a>
     </div>
   </header>
 
-  <!-- LANDING: category cards -->
-  <section id="landing" class="max-w-6xl mx-auto px-4 py-6">
-    <h2 class="text-base font-semibold text-slate-800 mb-3">Browse by category</h2>
-    <div id="category-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+  <!-- CARD GRID (used for every non-item level: buckets, brands, sub-types) -->
+  <section id="cards-view" class="max-w-6xl mx-auto px-4 py-6">
+    <h2 id="cards-title" class="text-base font-semibold text-slate-800 mb-3">Browse by category</h2>
+    <div id="card-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"></div>
   </section>
 
-  <!-- DETAILS: filters + item grid -->
-  <section id="details" class="hidden">
+  <!-- ITEM VIEW: filters + item grid -->
+  <section id="items-view" class="hidden">
     <div class="bg-white border-b border-slate-200">
       <div class="max-w-6xl mx-auto px-4 py-3">
         <input id="search" type="search" placeholder="Search model, spec, or keyword…"
@@ -102,9 +102,9 @@
   const PASSWORD_HASH = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
   const ITEMS = [{"model_name":"AirPods (2nd gen)","category":"Accessory","year":2019,"ram":0,"storage":0,"cpu":null,"display":null,"battery_code":"","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"accessory","quantity":11},{"model_name":"Apple TV (4th gen) HD","category":"Apple TV","year":2015,"ram":0,"storage":32,"cpu":null,"display":null,"battery_code":"","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"media","quantity":1},{"model_name":"Samsung Chromebook 4 11\"","category":"Chromebook","year":2019,"ram":4,"storage":32,"cpu":null,"display":"11\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":35},{"model_name":"Apple Thunderbolt Display","category":"Display","year":2011,"ram":0,"storage":0,"cpu":null,"display":"27\"","battery_code":"","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"display","quantity":2},{"model_name":"Apple Thunderbolt Display","category":"Display","year":2011,"ram":0,"storage":0,"cpu":null,"display":"27\"","battery_code":"","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"display","quantity":1},{"model_name":"iMac (2015) 21\"","category":"iMac","year":2015,"ram":8,"storage":1,"cpu":"2.8GHz","display":"21\"","battery_code":"","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-imac","quantity":1},{"model_name":"IPA6 9.7\"","category":"iPad","year":null,"ram":0,"storage":128,"cpu":null,"display":"9.7\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":"Gold","format":"ipad","quantity":1},{"model_name":"IPA6 9.7\"","category":"iPad","year":null,"ram":0,"storage":128,"cpu":null,"display":"9.7\"","battery_code":"b80","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"ipad","quantity":1},{"model_name":"iPad (9th gen) 10.5\"","category":"iPad","year":2021,"ram":0,"storage":64,"cpu":null,"display":"10.5\"","battery_code":"b80","grade_a":1,"has_charger":0,"has_touchbar":0,"color":"Space Gray","format":"ipad","quantity":1},{"model_name":"iPad Pro","category":"iPad","year":2018,"ram":0,"storage":256,"cpu":null,"display":null,"battery_code":"b80","grade_a":1,"has_charger":0,"has_touchbar":0,"color":"Silver","format":"simple","quantity":1},{"model_name":"iPad Pro","category":"iPad","year":2018,"ram":0,"storage":256,"cpu":null,"display":null,"battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":"Silver","format":"simple","quantity":1},{"model_name":"iPad Pro (1st gen) 12.9\"","category":"iPad","year":2015,"ram":0,"storage":32,"cpu":null,"display":"12.9\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"ipad","quantity":1},{"model_name":"iPad Pro (1st gen) 9.7\"","category":"iPad","year":2015,"ram":0,"storage":256,"cpu":null,"display":"9.7\"","battery_code":"b80","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"ipad","quantity":1},{"model_name":"iPad Pro 11\"","category":"iPad","year":2018,"ram":0,"storage":256,"cpu":null,"display":"11\"","battery_code":"b80","grade_a":1,"has_charger":0,"has_touchbar":0,"color":"Silver","format":"ipad","quantity":1},{"model_name":"iPad Pro 11\"","category":"iPad","year":2018,"ram":0,"storage":256,"cpu":null,"display":"11\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":"Space Gray","format":"ipad","quantity":2},{"model_name":"iPhone 10.5\"","category":"iPad","year":null,"ram":0,"storage":64,"cpu":null,"display":"10.5\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"ipad","quantity":2},{"model_name":"iPhone 6 9.7\"","category":"iPad","year":2014,"ram":0,"storage":128,"cpu":null,"display":"9.7\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":"Space Gray","format":"ipad","quantity":1},{"model_name":"iPhone 8 10.2\"","category":"iPad","year":2017,"ram":0,"storage":32,"cpu":null,"display":"10.2\"","battery_code":"b80","grade_a":1,"has_charger":0,"has_touchbar":0,"color":"Silver","format":"ipad","quantity":1},{"model_name":"iPhone 8 10.5\"","category":"iPad","year":2017,"ram":0,"storage":32,"cpu":null,"display":"10.5\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"ipad","quantity":4},{"model_name":"iPhone 8 10.5\"","category":"iPad","year":2017,"ram":0,"storage":128,"cpu":null,"display":"10.5\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"ipad","quantity":1},{"model_name":"iPhone 8 10\"","category":"iPad","year":2017,"ram":0,"storage":32,"cpu":null,"display":"10\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"ipad","quantity":2},{"model_name":"iPhone 8 10\"","category":"iPad","year":2017,"ram":0,"storage":32,"cpu":null,"display":"10\"","battery_code":"b80","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"ipad","quantity":1},{"model_name":"iPhone 6","category":"iPhone","year":2014,"ram":0,"storage":128,"cpu":null,"display":null,"battery_code":"b80","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"simple","quantity":1},{"model_name":"iPhone 6","category":"iPhone","year":2014,"ram":0,"storage":32,"cpu":null,"display":null,"battery_code":"b80","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"simple","quantity":1},{"model_name":"Mac mini (2014)","category":"Mac","year":2014,"ram":16,"storage":256,"cpu":"3.0GHz","display":null,"battery_code":"","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"desktop","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2015,"ram":4,"storage":256,"cpu":"1.6GHz","display":"11\"","battery_code":"b100","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2015,"ram":4,"storage":256,"cpu":"1.6GHz","display":"11\"","battery_code":"b82","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2015,"ram":4,"storage":256,"cpu":"1.6GHz","display":"11\"","battery_code":"b63","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2015,"ram":4,"storage":0,"cpu":"1.6GHz","display":"11\"","battery_code":"b84","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2015,"ram":4,"storage":0,"cpu":"1.6GHz","display":"11\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2015,"ram":4,"storage":256,"cpu":"1.6GHz","display":"11\"","battery_code":"b70","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2015,"ram":4,"storage":128,"cpu":"1.6GHz","display":"11\"","battery_code":"b84","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2015,"ram":4,"storage":256,"cpu":"1.6GHz","display":"11\"","battery_code":"b76","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2015,"ram":4,"storage":256,"cpu":"1.6GHz","display":"11\"","battery_code":"b83","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2015,"ram":4,"storage":256,"cpu":"1.6GHz","display":"11\"","battery_code":"b77","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2014,"ram":8,"storage":128,"cpu":"1.4GHz","display":"11\"","battery_code":"b90","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2014,"ram":8,"storage":128,"cpu":"1.4GHz","display":"11\"","battery_code":"b89","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2014,"ram":8,"storage":128,"cpu":"1.4GHz","display":"11\"","battery_code":"b0","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 11\"","category":"MacBook","year":2012,"ram":4,"storage":128,"cpu":"1.7GHz","display":"11\"","battery_code":"b77","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13","category":"MacBook","year":2013,"ram":4,"storage":128,"cpu":"1.4GHz","display":"13\"","battery_code":"b80","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2017,"ram":8,"storage":128,"cpu":"1.8GHz","display":"13\"","battery_code":"b62","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2017,"ram":8,"storage":256,"cpu":"1.8GHz","display":"13\"","battery_code":"b60","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2017,"ram":8,"storage":128,"cpu":"1.8GHz","display":"13\"","battery_code":"b23","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2017,"ram":8,"storage":128,"cpu":"1.8GHz","display":"13\"","battery_code":"b78","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2017,"ram":8,"storage":256,"cpu":"1.8GHz","display":"13\"","battery_code":"b6","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2017,"ram":8,"storage":256,"cpu":"1.8GHz","display":"13\"","battery_code":"b40","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2017,"ram":8,"storage":128,"cpu":"1.8GHz","display":"13\"","battery_code":"b67","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2017,"ram":4,"storage":256,"cpu":"1.6GHz","display":"13\"","battery_code":"b32/1290","grade_a":1,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2017,"ram":8,"storage":128,"cpu":"2.2GHz","display":"13\"","battery_code":"b85/302","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2015,"ram":8,"storage":128,"cpu":"1.6GHz","display":"13\"","battery_code":"b86","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2015,"ram":4,"storage":256,"cpu":"1.6GHz","display":"13\"","battery_code":"b75","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2015,"ram":8,"storage":128,"cpu":"1.6GHz","display":"13\"","battery_code":"b65/1258","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2015,"ram":4,"storage":256,"cpu":"1.6GHz","display":"13\"","battery_code":"b80/537","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2014,"ram":4,"storage":128,"cpu":"1.4GHz","display":"13\"","battery_code":"b72","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Air 13\"","category":"MacBook","year":2014,"ram":4,"storage":128,"cpu":"1.4GHz","display":"13\"","battery_code":"b57","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2011) 13\"","category":"MacBook","year":2011,"ram":8,"storage":500,"cpu":"2.3GHz","display":"13\"","battery_code":"b0","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2011) 13\"","category":"MacBook","year":2011,"ram":16,"storage":512,"cpu":"2.3GHz","display":"13\"","battery_code":"b75","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2011) 13\"","category":"MacBook","year":2011,"ram":4,"storage":320,"cpu":"2.3GHz","display":"13\"","battery_code":"b0","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2011) 13\"","category":"MacBook","year":2011,"ram":4,"storage":500,"cpu":"2.3GHz","display":"13\"","battery_code":"b84","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2011) 13\"","category":"MacBook","year":2011,"ram":4,"storage":500,"cpu":"2.3GHz","display":"13\"","battery_code":"b90","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2011) 13\"","category":"MacBook","year":2011,"ram":4,"storage":500,"cpu":"2.3GHz","display":"13\"","battery_code":"b0","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2012) 13\"","category":"MacBook","year":2012,"ram":4,"storage":0,"cpu":"2.5GHz","display":"13\"","battery_code":"b0","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2012) 13\"","category":"MacBook","year":2012,"ram":8,"storage":256,"cpu":"2.5GHz","display":"13\"","battery_code":"b90","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2012) 13\"","category":"MacBook","year":2012,"ram":8,"storage":0,"cpu":"2.5GHz","display":"13\"","battery_code":"b92","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2012) 13\"","category":"MacBook","year":2012,"ram":4,"storage":500,"cpu":"2.5GHz","display":"13\"","battery_code":"b77","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2012) 13\"","category":"MacBook","year":2012,"ram":4,"storage":128,"cpu":"2.5GHz","display":"13\"","battery_code":"b76","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2012) 13\"","category":"MacBook","year":2012,"ram":8,"storage":256,"cpu":"2.5GHz","display":"13\"","battery_code":"b0","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2012) 13\"","category":"MacBook","year":2012,"ram":8,"storage":500,"cpu":"2.5GHz","display":"13\"","battery_code":"b80","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2012) 13\"","category":"MacBook","year":2012,"ram":16,"storage":500,"cpu":"2.5GHz","display":"13\"","battery_code":"b84","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2015) 13\"","category":"MacBook","year":2015,"ram":8,"storage":128,"cpu":"2.7GHz","display":"13\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2015) 13\"","category":"MacBook","year":2015,"ram":16,"storage":1000,"cpu":"3.1GHz","display":"13\"","battery_code":"b68/488","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 13\"","category":"MacBook","year":2017,"ram":8,"storage":128,"cpu":"2.3GHz","display":"13\"","battery_code":"b65","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 13\"","category":"MacBook","year":2017,"ram":16,"storage":256,"cpu":"2.3GHz","display":"13\"","battery_code":"b80","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 13\"","category":"MacBook","year":2017,"ram":8,"storage":256,"cpu":"2.3GHz","display":"13\"","battery_code":"b100","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 13\"","category":"MacBook","year":2017,"ram":8,"storage":512,"cpu":"2.3GHz","display":"13\"","battery_code":"b0","grade_a":0,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 13\"","category":"MacBook","year":2017,"ram":16,"storage":256,"cpu":"2.5GHz","display":"13\"","battery_code":"b20","grade_a":1,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 13\"","category":"MacBook","year":2017,"ram":16,"storage":128,"cpu":"2.3GHz","display":"13\"","battery_code":"b73/413","grade_a":1,"has_charger":1,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 13\"","category":"MacBook","year":2017,"ram":8,"storage":256,"cpu":"2.3GHz","display":"13\"","battery_code":"b83/903","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 13\"","category":"MacBook","year":2017,"ram":16,"storage":256,"cpu":"2.5GHz","display":"13\"","battery_code":"b79/675","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 13\"","category":"MacBook","year":2017,"ram":8,"storage":128,"cpu":"2.3GHz","display":"13\"","battery_code":"b82/376","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 15\"","category":"MacBook","year":2017,"ram":16,"storage":256,"cpu":"2.6GHz","display":"15\"","battery_code":"b95","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 15\"","category":"MacBook","year":2017,"ram":16,"storage":512,"cpu":"2.8GHz","display":"15\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 15\"","category":"MacBook","year":2017,"ram":16,"storage":512,"cpu":"2.9GHz","display":"15\"","battery_code":"b80/1086","grade_a":1,"has_charger":1,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 15\"","category":"MacBook","year":2017,"ram":16,"storage":256,"cpu":"2.8GHz","display":"15\"","battery_code":"b82/255","grade_a":0,"has_charger":0,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 15\"","category":"MacBook","year":2017,"ram":16,"storage":512,"cpu":"3.1GHz","display":"15\"","battery_code":"b63/252","grade_a":0,"has_charger":0,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2017) 15\"","category":"MacBook","year":2017,"ram":16,"storage":512,"cpu":"3.1GHz","display":"15\"","battery_code":"b107/252","grade_a":1,"has_charger":0,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2019) 15\"","category":"MacBook","year":2019,"ram":16,"storage":512,"cpu":"2.6GHz","display":"15\"","battery_code":"b98/10","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2019) 16\"","category":"MacBook","year":2019,"ram":32,"storage":1,"cpu":"2.3GHz","display":"16\"","battery_code":"b80","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro (2019) 16\"","category":"MacBook","year":2019,"ram":16,"storage":1,"cpu":"2.3GHz","display":"16\"","battery_code":"b85","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 13 (2016)","category":"MacBook","year":2016,"ram":8,"storage":256,"cpu":"2.9GHz","display":"13\"","battery_code":"b90","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 13 (2016) 15\"","category":"MacBook","year":2016,"ram":16,"storage":1,"cpu":"2.9GHz","display":"15\"","battery_code":"b82","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 13 (2016) 15\"","category":"MacBook","year":2016,"ram":16,"storage":2,"cpu":"2.6GHz","display":"15\"","battery_code":"b80","grade_a":1,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 13 Touch Bar (2018)","category":"MacBook","year":2018,"ram":8,"storage":256,"cpu":"2.3GHz","display":"13\"","battery_code":"b0","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 13 Touch Bar (2018)","category":"MacBook","year":2018,"ram":8,"storage":256,"cpu":"2.3GHz","display":"13\"","battery_code":"b90/265","grade_a":0,"has_charger":0,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 13 Touch Bar (2018)","category":"MacBook","year":2018,"ram":16,"storage":256,"cpu":"2.3GHz","display":"13\"","battery_code":"b97/44","grade_a":1,"has_charger":0,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 13 Touch Bar (2018) 15\"","category":"MacBook","year":2018,"ram":32,"storage":512,"cpu":"2.6GHz","display":"15\"","battery_code":"b60","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 13 Touch Bar (2018) 15\"","category":"MacBook","year":2018,"ram":16,"storage":512,"cpu":"2.6GHz","display":"15\"","battery_code":"b30","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 15 Touch Bar (2018)","category":"MacBook","year":2018,"ram":16,"storage":1000,"cpu":"2.2GHz","display":"15\"","battery_code":"b79/343","grade_a":0,"has_charger":0,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 15 Touch Bar (2018)","category":"MacBook","year":2018,"ram":32,"storage":1000,"cpu":"2.4GHz","display":"15\"","battery_code":"b76/146","grade_a":0,"has_charger":0,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 15 Touch Bar (2018)","category":"MacBook","year":2018,"ram":16,"storage":512,"cpu":"2.6GHz","display":"15\"","battery_code":"b81/503","grade_a":0,"has_charger":1,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 15 Touch Bar (2018)","category":"MacBook","year":2018,"ram":16,"storage":512,"cpu":"2.6GHz","display":"15\"","battery_code":"b77/209","grade_a":1,"has_charger":0,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 15 Touch Bar (2018)","category":"MacBook","year":2018,"ram":32,"storage":512,"cpu":"2.9GHz","display":"15\"","battery_code":"b75/232","grade_a":0,"has_charger":0,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 15 Touch Bar (2018)","category":"MacBook","year":2018,"ram":16,"storage":512,"cpu":"2.6GHz","display":"15\"","battery_code":"b73/296","grade_a":0,"has_charger":0,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 15 Touch Bar (2018)","category":"MacBook","year":2018,"ram":16,"storage":512,"cpu":"2.6GHz","display":"15\"","battery_code":"b99/157","grade_a":0,"has_charger":0,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"MacBook Pro 16 (2019)","category":"MacBook","year":2019,"ram":16,"storage":1000,"cpu":"2.3GHz","display":"16\"","battery_code":"b78/1124","grade_a":0,"has_charger":0,"has_touchbar":1,"color":null,"format":"enhanced-macbook","quantity":1},{"model_name":"Studio X5 Max","category":"Phone","year":null,"ram":0,"storage":32,"cpu":null,"display":null,"battery_code":"bxx","grade_a":0,"has_charger":0,"has_touchbar":0,"color":null,"format":"classic","quantity":9}];
   const BUSINESS = "Heart4Macs";
+  const GENERATED_AT = "Apr 18, 2026";
 
-  // Category buckets — merge DB categories into customer-friendly groups.
-  // Each bucket: id, label, icon, and the DB categories it contains.
+  // Top-level buckets
   const BUCKETS = [
     { id: "laptops",     label: "Laptops",     icon: "💻", cats: ["MacBook", "Chromebook"] },
     { id: "desktops",    label: "Desktops",    icon: "🖥️", cats: ["iMac", "Mac", "Mac mini"] },
@@ -114,6 +114,26 @@
     { id: "tv",          label: "Apple TV",    icon: "📺", cats: ["Apple TV"] },
     { id: "accessories", label: "Accessories", icon: "🎧", cats: ["Accessory"] },
   ];
+
+  const APPLE_CATEGORIES = ["MacBook", "iMac", "Mac", "Mac mini", "iPad", "iPhone", "Apple TV"];
+  const BRAND_ICON = { "Apple": "", "Samsung": "", "Other": "" };
+
+  // ---- Derivations ----
+  function deriveBrand(item) {
+    if (APPLE_CATEGORIES.includes(item.category)) return "Apple";
+    const firstWord = (item.model_name || "").split(" ")[0];
+    if (firstWord && /^[A-Z]/.test(firstWord)) return firstWord;
+    return "Other";
+  }
+  function deriveSubtype(item) {
+    // Sub-types defined for Apple MacBooks only
+    if (item.category !== "MacBook") return null;
+    const name = item.model_name || "";
+    if (/\bAir\b/.test(name))  return "MacBook Air";
+    if (/\bPro\b/.test(name))  return "MacBook Pro";
+    return "MacBook";
+  }
+  function qtySum(items) { return items.reduce((s, it) => s + (it.quantity || 1), 0); }
 
   // ---- Password gate ----
   async function sha256(s) {
@@ -127,86 +147,149 @@
   const app = document.getElementById("app");
 
   if (sessionStorage.getItem("catalog_unlocked") === "1") {
-    gate.classList.add("hidden"); app.classList.remove("hidden"); showLanding();
+    gate.classList.add("hidden"); app.classList.remove("hidden"); renderLevel();
   }
   gateForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const hash = await sha256(gatePw.value);
     if (hash === PASSWORD_HASH) {
       sessionStorage.setItem("catalog_unlocked", "1");
-      gate.classList.add("hidden"); app.classList.remove("hidden"); showLanding();
+      gate.classList.add("hidden"); app.classList.remove("hidden"); renderLevel();
     } else {
       gateError.classList.remove("hidden"); gatePw.value = ""; gatePw.focus();
     }
   });
 
-  // ---- View management ----
-  const landingEl = document.getElementById("landing");
-  const detailsEl = document.getElementById("details");
-  const backBtn   = document.getElementById("back-btn");
+  // ---- Navigation state ----
+  // nav.bucket: bucket object or null
+  // nav.brand: string or null
+  // nav.subtype: string or null
+  const nav = { bucket: null, brand: null, subtype: null };
+
+  const cardsView = document.getElementById("cards-view");
+  const itemsView = document.getElementById("items-view");
+  const cardsTitle = document.getElementById("cards-title");
+  const cardGrid = document.getElementById("card-grid");
+  const backBtn = document.getElementById("back-btn");
   const headerTitle = document.getElementById("header-title");
   const headerSub = document.getElementById("header-sub");
 
-  let currentBucket = null;
+  backBtn.addEventListener("click", () => {
+    if (nav.subtype)      nav.subtype = null;
+    else if (nav.brand)   nav.brand = null;
+    else if (nav.bucket)  nav.bucket = null;
+    renderLevel();
+  });
 
-  function countInBucket(bucket) {
-    return ITEMS
-      .filter(it => bucket.cats.includes(it.category))
-      .reduce((sum, it) => sum + (it.quantity || 1), 0);
+  function setBreadcrumb() {
+    const parts = [BUSINESS];
+    if (nav.bucket)  parts.push(`${nav.bucket.icon} ${nav.bucket.label}`);
+    if (nav.brand)   parts.push(nav.brand);
+    if (nav.subtype) parts.push(nav.subtype);
+    headerTitle.textContent = parts[parts.length - 1];
+    backBtn.classList.toggle("hidden", parts.length === 1);
+    const totalQty = qtySum(currentItems());
+    headerSub.textContent = nav.bucket
+      ? `${totalQty} available`
+      : `${totalQty} items available · Updated ${GENERATED_AT}`;
   }
 
-  function showLanding() {
-    currentBucket = null;
-    detailsEl.classList.add("hidden");
-    landingEl.classList.remove("hidden");
-    backBtn.classList.add("hidden");
-    headerTitle.textContent = BUSINESS;
-    const totalQty = ITEMS.reduce((s, it) => s + (it.quantity || 1), 0);
-    headerSub.textContent = `${totalQty} items available · Updated Apr 18, 2026`;
-    renderCategoryGrid();
+  function currentItems() {
+    let list = ITEMS.slice();
+    if (nav.bucket)  list = list.filter(it => nav.bucket.cats.includes(it.category));
+    if (nav.brand)   list = list.filter(it => deriveBrand(it) === nav.brand);
+    if (nav.subtype) list = list.filter(it => deriveSubtype(it) === nav.subtype);
+    return list;
   }
 
-  function showBucket(bucket) {
-    currentBucket = bucket;
-    landingEl.classList.add("hidden");
-    detailsEl.classList.remove("hidden");
-    backBtn.classList.remove("hidden");
-    headerTitle.textContent = `${bucket.icon} ${bucket.label}`;
-    headerSub.textContent = `${countInBucket(bucket)} available`;
-    // Reset filters + repopulate option lists scoped to the bucket
-    ["search", "f-year", "f-ram", "f-storage"].forEach(id => document.getElementById(id).value = "");
-    document.getElementById("f-charger").checked = false;
-    document.getElementById("f-gradea").checked = false;
-    populateFilters(itemsInBucket(bucket));
-    renderItems();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  function renderLevel() {
+    // 1. No bucket → show bucket cards
+    if (!nav.bucket) { showBucketCards(); return; }
+
+    const inBucket = ITEMS.filter(it => nav.bucket.cats.includes(it.category));
+
+    // 2. No brand chosen yet → show brand cards if more than one
+    if (!nav.brand) {
+      const brands = [...new Set(inBucket.map(deriveBrand))].sort();
+      if (brands.length > 1) { showBrandCards(brands, inBucket); return; }
+      if (brands.length === 1) nav.brand = brands[0];
+    }
+
+    const inBrand = inBucket.filter(it => !nav.brand || deriveBrand(it) === nav.brand);
+
+    // 3. No sub-type chosen yet → show sub-type cards if any AND more than one
+    if (!nav.subtype) {
+      const subs = [...new Set(inBrand.map(deriveSubtype).filter(Boolean))].sort();
+      if (subs.length > 1) { showSubtypeCards(subs, inBrand); return; }
+      if (subs.length === 1) nav.subtype = subs[0];
+    }
+
+    // 4. Deepest meaningful level → show items with filters
+    showItems();
   }
 
-  backBtn.addEventListener("click", showLanding);
-
-  function itemsInBucket(bucket) {
-    return ITEMS.filter(it => bucket.cats.includes(it.category));
-  }
-
-  function renderCategoryGrid() {
-    const grid = document.getElementById("category-grid");
-    grid.innerHTML = "";
+  function showBucketCards() {
+    setBreadcrumb();
+    cardsTitle.textContent = "Browse by category";
+    cardGrid.innerHTML = "";
+    itemsView.classList.add("hidden");
+    cardsView.classList.remove("hidden");
     for (const bucket of BUCKETS) {
-      const count = countInBucket(bucket);
-      if (count === 0) continue; // hide empty categories
-      const card = document.createElement("button");
-      card.className = "cat-card bg-white border border-slate-200 rounded-2xl p-5 text-left flex flex-col gap-2";
-      card.innerHTML = `
-        <div class="text-3xl">${bucket.icon}</div>
-        <div class="font-semibold text-slate-900">${bucket.label}</div>
-        <div class="text-xs text-slate-500">${count} available</div>
-      `;
-      card.addEventListener("click", () => showBucket(bucket));
-      grid.appendChild(card);
+      const items = ITEMS.filter(it => bucket.cats.includes(it.category));
+      const count = qtySum(items);
+      if (count === 0) continue;
+      cardGrid.appendChild(simpleCard(bucket.label, bucket.icon, count, () => {
+        nav.bucket = bucket; nav.brand = null; nav.subtype = null; renderLevel();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }));
     }
   }
 
-  // ---- Filter option population (scoped to current bucket) ----
+  function showBrandCards(brands, items) {
+    setBreadcrumb();
+    cardsTitle.textContent = "Choose a brand";
+    cardGrid.innerHTML = "";
+    itemsView.classList.add("hidden");
+    cardsView.classList.remove("hidden");
+    for (const brand of brands) {
+      const brandItems = items.filter(it => deriveBrand(it) === brand);
+      const count = qtySum(brandItems);
+      cardGrid.appendChild(simpleCard(brand, "", count, () => {
+        nav.brand = brand; nav.subtype = null; renderLevel();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }));
+    }
+  }
+
+  function showSubtypeCards(subs, items) {
+    setBreadcrumb();
+    cardsTitle.textContent = "Pick a type";
+    cardGrid.innerHTML = "";
+    itemsView.classList.add("hidden");
+    cardsView.classList.remove("hidden");
+    for (const sub of subs) {
+      const subItems = items.filter(it => deriveSubtype(it) === sub);
+      const count = qtySum(subItems);
+      cardGrid.appendChild(simpleCard(sub, "", count, () => {
+        nav.subtype = sub; renderLevel();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }));
+    }
+  }
+
+  function simpleCard(label, icon, count, onClick) {
+    const el = document.createElement("button");
+    el.className = "cat-card bg-white border border-slate-200 rounded-2xl p-5 text-left flex flex-col gap-2";
+    el.innerHTML = `
+      ${icon ? `<div class="text-3xl">${icon}</div>` : ""}
+      <div class="font-semibold text-slate-900">${label}</div>
+      <div class="text-xs text-slate-500">${count} available</div>
+    `;
+    el.addEventListener("click", onClick);
+    return el;
+  }
+
+  // ---- Items view ----
   function unique(arr, key) {
     return [...new Set(arr.map(x => x[key]).filter(v => v != null && v !== ""))].sort((a, b) => {
       if (typeof a === "number") return a - b;
@@ -215,7 +298,6 @@
   }
   function fillSelect(id, values, formatter = (v) => v) {
     const sel = document.getElementById(id);
-    // Keep first option (the "Any …" placeholder); replace the rest
     while (sel.options.length > 1) sel.remove(1);
     for (const v of values) {
       const opt = document.createElement("option");
@@ -223,13 +305,24 @@
       sel.appendChild(opt);
     }
   }
-  function populateFilters(items) {
+
+  function showItems() {
+    setBreadcrumb();
+    cardsView.classList.add("hidden");
+    itemsView.classList.remove("hidden");
+    const items = currentItems();
+    // Reset filter values on entry
+    ["search","f-year","f-ram","f-storage"].forEach(id => document.getElementById(id).value = "");
+    document.getElementById("f-charger").checked = false;
+    document.getElementById("f-gradea").checked = false;
+    // Populate filter options scoped to the current selection
     fillSelect("f-year",    unique(items, "year"));
     fillSelect("f-ram",     unique(items, "ram"),     v => `${v} GB RAM`);
     fillSelect("f-storage", unique(items, "storage"), v => v >= 1000 ? `${v/1000} TB` : `${v} GB`);
+    renderItems();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // ---- Filter + render ----
   function matches(item, f) {
     if (f.search) {
       const hay = `${item.model_name||""} ${item.cpu||""} ${item.display||""} ${item.color||""}`.toLowerCase();
@@ -244,7 +337,6 @@
   }
 
   function renderItems() {
-    if (!currentBucket) return;
     const f = {
       search:  document.getElementById("search").value.trim().toLowerCase(),
       year:    document.getElementById("f-year").value,
@@ -253,13 +345,13 @@
       charger: document.getElementById("f-charger").checked,
       gradea:  document.getElementById("f-gradea").checked,
     };
-    const filtered = itemsInBucket(currentBucket).filter(it => matches(it, f));
+    const filtered = currentItems().filter(it => matches(it, f));
     const grid = document.getElementById("grid");
     const empty = document.getElementById("empty");
     grid.innerHTML = "";
     if (filtered.length === 0) { empty.classList.remove("hidden"); return; }
     empty.classList.add("hidden");
-    for (const it of filtered) grid.appendChild(cardEl(it));
+    for (const it of filtered) grid.appendChild(itemCard(it));
   }
 
   function storageLabel(v) { return v >= 1000 ? `${v/1000} TB` : `${v} GB`; }
@@ -274,7 +366,7 @@
     return letterMap[String(code).toUpperCase()] || `Battery: ${code}`;
   }
 
-  function cardEl(it) {
+  function itemCard(it) {
     const div = document.createElement("div");
     div.className = "card bg-white rounded-2xl border border-slate-200 p-4";
     const title = it.model_name || it.model || "Device";
@@ -288,7 +380,6 @@
     const tags = [];
     if (it.grade_a) tags.push(["Grade A", "bg-emerald-100 text-emerald-800"]);
     if (it.has_charger) tags.push(["Charger included", "bg-blue-100 text-blue-800"]);
-    // Touch Bar only meaningful on MacBooks
     if (it.has_touchbar && it.category === "MacBook") tags.push(["Touch Bar", "bg-slate-100 text-slate-700"]);
     const batt = batteryLabel(it.battery_code);
 
