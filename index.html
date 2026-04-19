@@ -204,7 +204,8 @@
     if (it.ram) chips.push(`${it.ram} GB RAM`);
     if (it.storage) chips.push(storageLabel(it.storage));
     if (it.cpu) chips.push(it.cpu);
-    if (it.display) chips.push(it.display);
+    // Only add display chip if the title doesn't already carry the size
+    if (it.display && !(it.model_name || '').includes(it.display)) chips.push(it.display);
     if (it.color) chips.push(it.color);
     const tags = [];
     if (it.grade_a) tags.push(["Grade A", "bg-emerald-100 text-emerald-800"]);
