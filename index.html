@@ -414,7 +414,7 @@
         <h3 class="font-semibold text-slate-900">${title}${it.year ? ` · ${it.year}` : ""}</h3>
         ${qty ? `<span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full whitespace-nowrap">${qty} available</span>` : ""}
       </div>
-      ${it.id != null ? `<p class="text-xs text-slate-500 mb-2">ID: ${it.id}</p>` : ""}
+      ${it.id != null ? `<p class="text-sm font-bold text-red-600 mb-2">ID: ${it.id}</p>` : ""}
       <div class="flex flex-wrap gap-1.5 mb-3">
         ${chips.map(c => `<span class="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full">${c}</span>`).join("")}
       </div>
